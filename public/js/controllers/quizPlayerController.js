@@ -124,6 +124,7 @@ angular.module('quizRT')
                                     topicId: startGameData.topicId,
                                     userId: $rootScope.loggedInUser.userId,
                                     responseTime: $scope.time,
+                                    selectedOption:id,
                                     questionId : $scope.currentQuestion.questionId
                                 });
                             } else {
@@ -136,6 +137,7 @@ angular.module('quizRT')
                                     topicId: startGameData.topicId,
                                     userId: $rootScope.loggedInUser.userId,
                                     responseTime:$scope.time,
+                                    selectedOption:id,
                                     questionId : $scope.currentQuestion.questionId
                                 });
                             }

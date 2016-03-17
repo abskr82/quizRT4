@@ -20,10 +20,8 @@ var GameManagerClass = require('./gameManager/gameManager.js'),
     GameManager = new GameManagerClass(),
     TournamentManager = require('./tournamentManager/tournamentManager.js');
 //Edited by Wave 5
-var clickStreamInit = require('./clickStreamStatistics');
+var userAnalyticsSave = require('./clickStreamStatistics');
 //End
-var clickStreamInitObj = new clickStreamInit();
-
 module.exports = function(server,sessionMiddleware) {
   var io = require('socket.io')(server);
   io.use(function(socket,next){
@@ -82,7 +80,7 @@ module.exports = function(server,sessionMiddleware) {
             //   playerName.push(player.userId);
             // });
             //console.log("^^^^^^^^^^^^^^^^^^  pass case  "+ data.gameId +"   " data.topicId +"  " + data.userId +" " + GameManager.getGamePlayers(data.gameId) +"  "  + data.responseTime);
-          clickStreamInitObj.addUserAnalytics(data);
+            userAnalyticsSave(data,'quiz');
 
           console.log("Loging %%%%%%%%%%%%%   " + data.questionId);
           if(data.ans =='correct'){
@@ -183,6 +181,7 @@ module.exports = function(server,sessionMiddleware) {
 
 
             client.on('confirmAnswer',function( data ){
+                userAnalyticsSave(data,'tournament');
               if(data.ans == 'correct') {
                 var gameManager = TournamentManager.getGameManager( data.tournamentId ),
                     gamePlayers = gameManager ? gameManager.getGamePlayers( data.gameId ) : null ;

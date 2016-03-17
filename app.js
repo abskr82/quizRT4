@@ -46,9 +46,6 @@ var express = require('express'),
       },
       secret: 'keyboard cat'
   }),
-  interceptor = require('./routes/clickStream');
-
-
 
 // mongoose.connect('mongodb://quizart.stackroute.in/quizRT3');
 // mongoose.connect('mongodb://172.23.238.253/quizRT3');
@@ -57,9 +54,7 @@ mongoose.connection.on('error', console.error.bind(console, 'Failed to establish
 mongoose.connection.on('open', function() {
   console.log('Connected to MongoDB@StackRouteHost:PORT/quizRT3');
 });
-
 require('./routes/socket.js')(server,sessionMiddleware);
-
 
 
 app.use(logger('dev'));
@@ -77,9 +72,6 @@ app.set('views', './views');
 
 app.use(express.static('./public'));
 //register routers to route paths
-
-
-app.use(interceptor);
 
 app.use('/', index);
 app.use('/auth',authenticationHandler);
@@ -102,6 +94,6 @@ app.use('/tournamentHandler', tournamentHandler);
 
 
 // server.listen(8080, function() {
-server.listen(8082, function() {
+server.listen(7000, function() {
   console.log('App started for Quiz Play!! Please use ur IP e.g 123.23.123.23:2000');
 });
